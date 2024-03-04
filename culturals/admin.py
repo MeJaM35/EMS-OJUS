@@ -9,6 +9,10 @@ class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
+class GSignedAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('participant', 'pname', 'moodle_id', 'contact', 'dept', 'year')
+
+
 class SignedAdmin(ExportActionMixin, admin.ModelAdmin):
     list_display = ('event_name', 'fname', 'lname', 'moodle_id', 'dept', 'year')
     list_filter = ('event__name',)
@@ -33,7 +37,7 @@ class SignedAdmin(ExportActionMixin, admin.ModelAdmin):
 
 admin.site.register(Signed, SignedAdmin)
 
-admin.site.register(GSigned)
+admin.site.register(GSigned, GSignedAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(eventHead)
 
